@@ -29,7 +29,8 @@ class GridAdapter(_context: Context, _cells: List<SudokuCell>) : BaseAdapter() {
 
         val inflator = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         var cellView = inflator.inflate(R.layout.cell_view, null)
-        cellView.value.setText(cell.value.toString())
+        val text: String = if (cell.value == 0) " " else cell.value.toString()
+        cellView.value.setText(text)
 
         return cellView
     }
