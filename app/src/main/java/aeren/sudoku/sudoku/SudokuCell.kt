@@ -1,74 +1,67 @@
 package aeren.sudoku.sudoku
 
 class SudokuCell(_board: SudokuBoard, _value: Int, _position: Int) {
-    var value: Int = _value
-    val possibleValues: MutableList<Int> = ArrayList()
     val board: SudokuBoard = _board
-    val isEmpty: Boolean = (value == 0)
+
+    var value: Int = _value
+    var boxId: Int = 0
+
     var position: Int = _position
     val x = (position % 9)
     val y = (position / 9)
-    var block: Int = 0
-    var sudokuBlock: SudokuBlock
 
     init {
         if (x < 3) {
             if (y < 3) {
-                block = 0
+                boxId = 0
             } else if (y < 6) {
-                block = 3
+                boxId = 3
             } else if (y < 9) {
-                block = 6
+                boxId = 6
             }
         } else if (x < 6) {
             if (y < 3) {
-                block = 1
+                boxId = 1
             } else if (y < 6) {
-                block = 4
+                boxId = 4
             } else if (y < 9) {
-                block = 7
+                boxId = 7
             }
         } else if (x < 9) {
             if (y < 3) {
-                block = 2
+                boxId = 2
             } else if (y < 6) {
-                block = 5
+                boxId = 5
             } else if (y < 9) {
-                block = 8
+                boxId = 8
             }
         }
-
-        sudokuBlock = board.blocks[block]
-        possibleValues.addAll(sudokuBlock.lackingNumbers)
     }
 
+    fun isValid(value: Int): Boolean {
+        if (possibleValues().contains(value))
+            return true
 
-    fun computePossibleValues() {
-        if (!isEmpty)
-            return
+        return false
+    }
 
-        //Check row
-        for (i in 0..8) {
-            val index = i + (y * 9)
-            val cell: SudokuCell = board.cells[index]
+    fun possibleValues(): List<Int> {
+        val possibleValues = mutableListOf(1,2,3,4,5,6,7,8,9)
 
-            if (possibleValues.contains(cell.value)) {
-                possibleValues.remove(cell.value)
-            }
+        val forbiddenValues = ArrayList<Int>()
+        forbiddenValues.addAll(board.getBox(boxId))
+        forbiddenValues.addAll(board.getRow(y))
+        forbiddenValues.addAll(board.getColumn(x))
+
+        for (num in forbiddenValues) {
+            if (possibleValues.contains(num))
+                possibleValues.remove(num)
         }
 
-        //Check column
-        for (i in 0..8) {
-            val index = x + (i * 9)
-            val cell: SudokuCell = board.cells[index]
-
-            if (possibleValues.contains(cell.value)) {
-                possibleValues.remove(cell.value)
-            }
-        }
+        return possibleValues
     }
 
     override fun toString(): String {
-        return "value: $value, possibleValues: ${possibleValues}, isEmpty:$isEmpty, position=($x, $y), Block[$sudokuBlock]"
+        return "value: $value, possibleValues: ${possibleValues()}"
     }
 }

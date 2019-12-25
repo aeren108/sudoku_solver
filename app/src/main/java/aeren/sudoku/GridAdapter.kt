@@ -32,7 +32,7 @@ class GridAdapter(_context: Context, _cells: List<SudokuCell>) : BaseAdapter() {
         var cellView = inflator.inflate(R.layout.cell_view, null)
         val text: String = if (cell.value == 0) " " else cell.value.toString()
         cellView.value.setText(text)
-        if (cell.isEmpty) {
+        if (cell.value == 0) {
             cellView.value.setTextColor(Color.parseColor("#3461eb"))
         }
 
