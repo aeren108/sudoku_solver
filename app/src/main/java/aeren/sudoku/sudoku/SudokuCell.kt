@@ -1,16 +1,18 @@
 package aeren.sudoku.sudoku
 
 class SudokuCell(_board: SudokuBoard, _value: Int, _position: Int) {
-    val board: SudokuBoard = _board
+    private val board: SudokuBoard = _board
 
-    var value: Int = _value
-    var boxId: Int = 0
+    var value = _value
+    var boxId = 0
+    val isEmptyAtFirst = value == 0
 
-    var position: Int = _position
-    val x = (position % 9)
-    val y = (position / 9)
+    var position = _position
+    private val x = position % 9
+    private val y = position / 9
 
     init {
+        //Compute boxId
         if (x < 3) {
             if (y < 3) {
                 boxId = 0
@@ -45,15 +47,15 @@ class SudokuCell(_board: SudokuBoard, _value: Int, _position: Int) {
         return false
     }
 
-    fun possibleValues(): List<Int> {
+    private fun possibleValues(): List<Int> {
         val possibleValues = mutableListOf(1,2,3,4,5,6,7,8,9)
 
-        val forbiddenValues = ArrayList<Int>()
-        forbiddenValues.addAll(board.getBox(boxId))
-        forbiddenValues.addAll(board.getRow(y))
-        forbiddenValues.addAll(board.getColumn(x))
+        val improperValues = ArrayList<Int>()
+        improperValues.addAll(board.getBox(boxId))
+        improperValues.addAll(board.getRow(y))
+        improperValues.addAll(board.getColumn(x))
 
-        for (num in forbiddenValues) {
+        for (num in improperValues) {
             if (possibleValues.contains(num))
                 possibleValues.remove(num)
         }

@@ -1,15 +1,20 @@
 package aeren.sudoku.sudoku
 
 class SudokuBoard(_values: List<Int>) {
-    val values: List<Int> = _values
+    private val values: List<Int> = _values
     val cells: MutableList<SudokuCell> = ArrayList()
 
     init {
-        for (i in 0..(values.size-1)) {
+        for (i in values.indices) {
             cells.add(SudokuCell(this, values[i], i))
         }
     }
 
+    /**
+     * Returns the nine 3x3 boxes of the sudoku
+     * @param boxId the position of box which cell is in
+     * @return the list which contains numbers in the box
+     */
     fun getBox(boxId: Int): List<Int> {
         val boxCells = ArrayList<Int>()
 
@@ -54,7 +59,7 @@ class SudokuBoard(_values: List<Int>) {
     }
 
     //Returns first empty cell in sudoku board
-    fun findEmpty(): SudokuCell? {
+    private fun findEmpty(): SudokuCell? {
         for (cell in cells) {
             if (cell.value == 0)
                 return cell
@@ -65,16 +70,13 @@ class SudokuBoard(_values: List<Int>) {
 
     //Details for backtracking algorithm: https://en.wikipedia.org/wiki/Backtracking
     fun solve(): Boolean {
-        val cell = findEmpty()
-
-        if (cell == null)
-            return true
+        val cell = findEmpty() ?: return true
 
         for (i in 1..9) {
             if (cell.isValid(i)) {
                 cell.value = i
 
-                //Bactracking
+                //Backtracking
                 if (solve())
                     return true
 
