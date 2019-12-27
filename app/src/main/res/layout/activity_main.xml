@@ -1,15 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context="aeren.sudoku.MainActivity"
+    android:orientation="vertical">
 
-    <Button
-        android:id="@+id/buton"
+
+    <GridView
+        android:id="@+id/grid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sudoku Çöz"
-        android:layout_gravity="center"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:background="@drawable/gridview_bg"
+        android:numColumns="9"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp">
+
+        <EditText
+            android:id="@+id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:hint="Number"
+            android:backgroundTint="@android:color/holo_purple"
+            android:inputType="phone"/>
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save number"
+            android:backgroundTint="@android:color/holo_orange_light"/>
+
+        <Button
+            android:id="@+id/solve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Çöz"
+            android:layout_marginStart="75dp"
+            android:backgroundTint="@android:color/holo_orange_light"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

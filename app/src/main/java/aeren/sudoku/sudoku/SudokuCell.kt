@@ -7,7 +7,7 @@ class SudokuCell(_board: SudokuBoard, _value: Int, _position: Int) {
     var boxId = 0
     val isEmptyAtFirst = value == 0
 
-    var position = _position
+    private var position = _position
     private val x = position % 9
     private val y = position / 9
 

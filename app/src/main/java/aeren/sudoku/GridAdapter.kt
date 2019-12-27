@@ -11,8 +11,8 @@ import android.widget.BaseAdapter
 import kotlinx.android.synthetic.main.cell_view.view.*
 
 class GridAdapter(_context: Context, _cells: List<SudokuCell>) : BaseAdapter() {
-    var context: Context = _context
-    var cells: List<SudokuCell> = _cells
+    private var context: Context = _context
+    private var cells: List<SudokuCell> = _cells
 
     override fun getItem(position: Int): Any {
         return cells[position]
