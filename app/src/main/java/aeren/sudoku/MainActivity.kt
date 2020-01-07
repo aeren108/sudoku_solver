@@ -30,14 +30,14 @@ class MainActivity : AppCompatActivity() {
         saveButton = findViewById(R.id.save)
         numberInput = findViewById(R.id.number)
 
-        //Example sudoku to solve
+        //Empty sudoku list
         values.addAll(listOf(0,0,0,0,0,0,0,0,0,
                              0,0,0,0,0,0,0,0,0,
                              0,0,0,0,0,0,0,0,0,
                              0,0,0,0,0,0,0,0,0,
                              0,0,0,0,0,0,0,0,0,
-                             0,0,0,0,0,0,0,0,6,
-                             0,0,0,0,0,0,0,8,0,
+                             0,0,0,0,0,0,0,0,0,
+                             0,0,0,0,0,0,0,0,0,
                              0,0,0,0,0,0,0,0,0,
                              0,0,0,0,0,0,0,0,0))
 
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             focusedView?.setBackgroundColor(Color.TRANSPARENT)
             focusedView?.setBackgroundResource(R.drawable.gridview_bg)
 
-            //Highlighted clicked view
+            //Highlight clicked view
             focusedView = view as CellView
             focusedView?.setBackgroundColor(Color.argb(75, 255, 143, 190))
 
